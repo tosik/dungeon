@@ -15,6 +15,7 @@ class Quasi3d
     @parent = parent
     @panels = {}
 
+    # rendering order
     [
       [-4, 3],
       [ 4, 3],
@@ -23,18 +24,20 @@ class Quasi3d
       [ 0, 3],
       [-3, 2],
       [ 3, 2],
-      [-1, 2],
+      #[-1, 2],
       [ 1, 2],
       [-4, 1],
       [ 4, 1],
-      [-2, 1],
+      #[-2, 1],
       [ 2, 1],
-      [ 0, 1],
-      [-1, 0],
-      [ 1, 0],
+      #[ 0, 1],
+      #[-1, 0],
+      #[ 1, 0],
     ].each do |xy|
-      @panels[xy] = rand(3) == 0
+      @panels[xy] = false
+      @panels[xy] = true
     end
+
   end
 
   def refresh
@@ -99,29 +102,29 @@ class Quasi3d
     EOS
     )
 
-    parts[[-1,2]] = create_wall(9,9,5,15, <<-EOS
-.._      
-|  "-.   
-|     "-.
-|       |
-| -1,2  |
-|       |
-|     .-"
-|  .-"   
-"""      
+    parts[[-1,2]] = create_wall(9,7,5,15, <<-EOS
+.      
+|"-.   
+|   "-.
+|     |
+|-1,2 |
+|     |
+|   .-"
+|.-"   
+"      
     EOS
     )
 
-    parts[[1,2]] = create_wall(9,9,5,29, <<-EOS
-      _..
-   .-"  |
-.-"     |
-|       |
-|  1,2  |
-|       |
-"-.     |
-   "-.  |
-      """
+    parts[[1,2]] = create_wall(9,7,5,31, <<-EOS
+      .
+   .-"|
+.-"   |
+|     |
+| 1,2 |
+|     |
+"-.   |
+   "-.|
+      "
     EOS
     )
 
@@ -182,7 +185,7 @@ class Quasi3d
   |
   |
 -4|
-, |
+ ,|
  1|
   |
   |
