@@ -44,7 +44,6 @@ class Quasi3d
 
   def refresh
     @panels.each do |xy, is_wall|
-      d xy
       refresh_wall(*xy) if is_wall
     end
   end
