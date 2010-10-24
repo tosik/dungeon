@@ -4,19 +4,29 @@ class Quasi3d
   def initialize(parent)
     @parent = parent
     @panels = {}
+
+    [
+      [-4, 3],
+      [4, 3],
+      [-2, 3],
+      [2, 3],
+      [0, 3],
+      [-2, 1],
+      [2, 1],
+      [-1, 2],
+      [1, 2],
+      [-1, 0],
+      [1, 0],
+      [0, 1],
+    ].each do |xy|
+      @panels[xy] = rand(2) == 1
+    end
   end
 
   def refresh
-    refresh_wall(-4, 3)
-    refresh_wall(4, 3)
-    refresh_wall(-2, 3)
-    refresh_wall(2, 3)
-    refresh_wall(0, 3)
-    refresh_wall(-2, 1)
-    refresh_wall(2, 1)
-    #refresh_wall(-1, 0)
-    refresh_wall(1, 0)
-    refresh_wall(0, 1)
+    @panels.each do |xy, is_wall|
+      refresh_wall(*xy) if is_wall
+    end
   end
 
   def refresh_wall(x,y)
@@ -110,6 +120,32 @@ class Quasi3d
 |   0,3   |
 |         |
 "---------"
+    EOS
+    )
+
+    parts[[-1,2]] = create_wall(9,9,5,15, <<-EOS
+.._      
+|  "-.   
+|     "-.
+|       |
+| -1,2  |
+|       |
+|     .-"
+|  .-"   
+"""      
+    EOS
+    )
+
+    parts[[1,2]] = create_wall(9,9,5,29, <<-EOS
+      _..
+   .-"  |
+.-"     |
+|       |
+|  1,2  |
+|       |
+"-.     |
+   "-.  |
+      """
     EOS
     )
 
