@@ -61,10 +61,10 @@ class MainArea < Window
   end
 
   def relative_pos(x, y)
-    return [@pos[0] + x, @pos[1] + y] if @eye == [0, 1]
-    return [@pos[0] - x, @pos[1] - y] if @eye == [0, -1]
-    return [@pos[0] + y, @pos[1] - x] if @eye == [1, 0]
-    return [@pos[0] - y, @pos[1] + x] if @eye == [-1, 0]
+    return [@pos[0] + x, @pos[1] + y] if @eye == [ 0,  1]
+    return [@pos[0] - x, @pos[1] - y] if @eye == [ 0, -1]
+    return [@pos[0] + y, @pos[1] + x] if @eye == [ 1,  0]
+    return [@pos[0] - y, @pos[1] - x] if @eye == [-1,  0]
     raise "@eye is invalid"
   end
 
