@@ -4,6 +4,7 @@ require "automaze"
 require_relative "text_window"
 require_relative "quasi3d"
 require_relative "debug"
+require "matrix"
 
 class MainArea < Window
   def initialize
@@ -31,6 +32,10 @@ class MainArea < Window
       when ?d
         @eye = rotate_right(@eye)
         d "eye", @eye
+        return
+      when ?s
+        @pos = relative_pos(*[0,-2])
+        d "pos", @pos
         return
       else
         return
