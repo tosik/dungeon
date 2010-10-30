@@ -1,15 +1,5 @@
-require_relative "debug"
+require "d"
 
-#
-# ^ = self
-# |- = wall
-# i = post
-#
-#-i-i-i-i-
-# | | | |
-#-i-i-i-i-
-# | |^| |
-#
 class Quasi3d
   def initialize(parent)
     @parent = parent

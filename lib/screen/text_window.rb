@@ -1,4 +1,4 @@
-require_relative "window"
+require "screen/window"
 
 class TextWindow < Window
   def initialize(size_y, size_x, pos_y, pos_x, options={})

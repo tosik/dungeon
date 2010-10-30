@@ -1,4 +1,6 @@
 
+require "automaze"
+
 class Maze < Automaze::Automaze
   def initialize
     super(:algorithm => :dug_tunnels, :size_x => 50, :size_y => 14)

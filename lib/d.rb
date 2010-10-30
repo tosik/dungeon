@@ -1,4 +1,4 @@
-require_relative "text_window"
+require "screen/text_window"
 
 def d(*args)
   @win ||= TextWindow.new(25, 31, 0, 80)

@@ -1,8 +1,6 @@
 
-$: << "../automazerb/lib/"
-require "automaze"
-
-require_relative "screen"
+require "screen"
+require "d"
 
 class Dungeon
   def run

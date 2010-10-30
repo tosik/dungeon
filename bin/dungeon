@@ -1,7 +1,12 @@
 #!/bin/ruby
-# coding: utf-8
 
-require_relative "../lib/dungeon"
+require "pathname"
+["lib/", "../automazerb/lib/"].each do |path|
+  $: << Pathname(path).realpath.to_s
+end
+
+require "dungeon"
+require "pp"
 
 dungeon = Dungeon.new
 dungeon.run
