@@ -4,6 +4,7 @@ require "automaze"
 require_relative "text_window"
 require_relative "quasi3d"
 require_relative "debug"
+require_relative "position"
 require "matrix"
 
 class MainArea < Window
@@ -15,45 +16,23 @@ class MainArea < Window
     @map.text = @maze.to_s.delete("\n")
 
     @pos = [0,0]
-    @eye = [0,1]
+    @direction = 0
   end
 
   def key_wait
     loop do
       case @window.getch
       when ?w
-        @pos = relative_pos(*[0,2])
-        d "pos", @pos
-        return
+        move_front
       when ?a
-        @eye = rotate_left(@eye)
-        d "eye", @eye
-        return
+        @direction -= 1
       when ?d
-        @eye = rotate_right(@eye)
-        d "eye", @eye
-        return
+        @direction += 1
       when ?s
-        @pos = relative_pos(*[0,-2])
-        d "pos", @pos
-        return
-      else
-        return
+        move_back
       end
+      return
     end
-  end
-
-  def rotate_left(xy)
-    return [ 1, 0] if xy == [ 0, 1]
-    return [-1, 0] if xy == [ 0,-1]
-    return [ 0,-1] if xy == [ 1, 0]
-    return [ 0, 1] if xy == [-1, 0]
-  end
-  def rotate_right(xy)
-    return [-1, 0] if xy == [ 0, 1]
-    return [ 1, 0] if xy == [ 0,-1]
-    return [ 0, 1] if xy == [ 1, 0]
-    return [ 0,-1] if xy == [-1, 0]
   end
 
   def update
@@ -66,11 +45,20 @@ class MainArea < Window
   end
 
   def relative_pos(x, y)
-    return [@pos[0] + x, @pos[1] + y] if @eye == [ 0,  1]
-    return [@pos[0] - x, @pos[1] - y] if @eye == [ 0, -1]
-    return [@pos[0] + y, @pos[1] + x] if @eye == [ 1,  0]
-    return [@pos[0] - y, @pos[1] - x] if @eye == [-1,  0]
-    raise "@eye is invalid"
+    Position.relative(@pos, [x,y], @direction)
+  end
+
+  def move(x, y)
+    next_pos = relative_pos(x, y)
+    @pos = next_pos if @maze.panels(*next_pos).floor?
+  end
+
+  def move_front
+    move(0, 2)
+  end
+
+  def move_back
+    move(0, -2)
   end
 
   def refresh
