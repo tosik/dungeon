@@ -23,14 +23,33 @@ class Quasi3d
 
   def refresh
     @panels.each do |xy, is_wall|
+      clear_wall(*xy)
+    end
+    @panels.each do |xy, is_wall|
+      build_wall(*xy) if is_wall
+    end
+    @panels.each do |xy, is_wall|
       refresh_wall(*xy) if is_wall
     end
   end
 
+  def clear_wall(x,y)
+    wall = walls[[x,y]][:wall]
+    (0..wall.maxy).each do |y|
+      (0..wall.maxx).each do |x|
+        wall.setpos(y, x)
+        wall.addch(" ")
+      end
+    end
+  end
+
+  def build_wall(x,y)
+    info = walls[[x,y]]
+    info[:wall] << info[:text]
+  end
+
   def refresh_wall(x,y)
     info = walls[[x,y]]
-    info[:wall].clear
-    info[:wall] << info[:text]
     info[:wall].refresh
   end
 
