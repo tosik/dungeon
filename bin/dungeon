@@ -1,12 +1,13 @@
 #!/bin/ruby
 
 require "pathname"
-["lib/", "../automazerb/lib/"].each do |path|
+[
+  "lib/",
+].each do |path|
   $: << Pathname(path).realpath.to_s
 end
 
 require "dungeon"
-require "pp"
 
 dungeon = Dungeon.new
 dungeon.run
