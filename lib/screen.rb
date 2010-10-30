@@ -6,14 +6,15 @@ require_relative "quasi3d"
 require_relative "debug"
 require_relative "position"
 require_relative "player"
+require_relative "maze"
 require "matrix"
 
 class MainArea < Window
-  def initialize
+  def initialize(options={})
     super(19, 53, 0, 0)
     @quasi3d = Quasi3d.new(@window)
-    @maze = Automaze::Automaze.new(:algorithm => :dug_tunnels, :size_x => 10, :size_y => 10)
-    @map = TextWindow.new(15, 28, 25, 0)
+    @maze = Maze.new
+    @map = TextWindow.new(@maze.size_y + 5, @maze.size_x * 2 + 8, 25, 0)
     @map.text = @maze.to_s.delete("\n")
     @player = Player.new(@maze)
   end
