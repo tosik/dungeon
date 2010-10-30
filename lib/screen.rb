@@ -25,12 +25,13 @@ class MainArea < Window
       when ?w
         move_front
       when ?a
-        @direction -= 1
+        turn_left
       when ?d
-        @direction += 1
+        turn_right
       when ?s
         move_back
       end
+      d @pos, @direction
       return
     end
   end
@@ -48,17 +49,22 @@ class MainArea < Window
     Position.relative(@pos, [x,y], @direction)
   end
 
-  def move(x, y)
-    next_pos = relative_pos(x, y)
-    @pos = next_pos if @maze.panels(*next_pos).floor?
-  end
-
   def move_front
-    move(0, 2)
+    @pos = relative_pos(0, 2) if @maze.panels(*relative_pos(0, 1)).floor?
   end
 
   def move_back
-    move(0, -2)
+    @pos = relative_pos(0, -2) if @maze.panels(*relative_pos(0, -1)).floor?
+  end
+
+  def turn_left
+    @direction += 1
+    @direction = 0 if @direction == 4
+  end
+
+  def turn_right
+    @direction -= 1
+    @direction = 3 if @direction == -1
   end
 
   def refresh
