@@ -17,22 +17,22 @@ class Quasi3d
 
     # rendering order
     [
-      [-4, 3],
       [ 4, 3],
-      [-2, 3],
+      [-4, 3],
       [ 2, 3],
+      [-2, 3],
       [ 0, 3],
-      [-3, 2],
       [ 3, 2],
-      [-1, 2],
+      [-3, 2],
       [ 1, 2],
-      [-4, 1],
+      [-1, 2],
       [ 4, 1],
-      [-2, 1],
+      [-4, 1],
       [ 2, 1],
+      [-2, 1],
       [ 0, 1],
-      [-1, 0],
       [ 1, 0],
+      [-1, 0],
     ].each do |xy|
       @panels[xy] = false
     end
@@ -58,16 +58,7 @@ class Quasi3d
   def walls
     parts = {}
 
-    parts[[-4,3]] = create_wall(5,11,7,1, <<-EOS
-.---------.
-|         |
-|  -4,3   |
-|         |
-"---------"
-    EOS
-    )
-
-    parts[[4,3]] = create_wall(5,11,7,41, <<-EOS
+    parts[[4,3]] = create_wall(5,11,7,1, <<-EOS
 .---------.
 |         |
 |   4,3   |
@@ -76,19 +67,28 @@ class Quasi3d
     EOS
     )
 
-    parts[[-2,3]] = create_wall(5,11,7,11, <<-EOS
+    parts[[-4,3]] = create_wall(5,11,7,41, <<-EOS
 .---------.
 |         |
-|  -2,3   |
+|  -4,3   |
 |         |
 "---------"
     EOS
     )
 
-    parts[[2,3]] = create_wall(5,11,7,31, <<-EOS
+    parts[[2,3]] = create_wall(5,11,7,11, <<-EOS
 .---------.
 |         |
 |   2,3   |
+|         |
+"---------"
+    EOS
+    )
+
+    parts[[-2,3]] = create_wall(5,11,7,31, <<-EOS
+.---------.
+|         |
+|  -2,3   |
 |         |
 "---------"
     EOS
@@ -103,12 +103,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[-1,2]] = create_wall(9,7,5,15, <<-EOS
+    parts[[1,2]] = create_wall(9,7,5,15, <<-EOS
 .      
 |"-.   
 |   "-.
 |     |
-|-1,2 |
+| 1,2 |
 |     |
 |   .-"
 |.-"   
@@ -116,12 +116,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[1,2]] = create_wall(9,7,5,31, <<-EOS
+    parts[[-1,2]] = create_wall(9,7,5,31, <<-EOS
       .
    .-"|
 .-"   |
 |     |
-| 1,2 |
+|-1,2 |
 |     |
 "-.   |
    "-.|
@@ -129,12 +129,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[-3,2]] = create_wall(9,9,5,3, <<-EOS
+    parts[[3,2]] = create_wall(9,9,5,3, <<-EOS
 .._      
 |  "-.   
 |     "-.
 |       |
-| -3,2  |
+|  3,2  |
 |       |
 |     .-"
 |  .-"   
@@ -142,12 +142,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[3,2]] = create_wall(9,9,5,41, <<-EOS
+    parts[[-3,2]] = create_wall(9,9,5,41, <<-EOS
       _..
    .-"  |
 .-"     |
 |       |
-|  3,2  |
+| -3,2  |
 |       |
 "-.     |
    "-.  |
@@ -155,12 +155,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[-2,1]] = create_wall(9,15,5,1, <<-EOS
+    parts[[2,1]] = create_wall(9,15,5,1, <<-EOS
 --------------.
               |
               |
               |
-     -2,1     |
+     2,1      |
               |
               |
               |
@@ -168,12 +168,12 @@ class Quasi3d
     EOS
     )
 
-    parts[[2,1]] = create_wall(9,15,5,37, <<-EOS
+    parts[[-2,1]] = create_wall(9,15,5,37, <<-EOS
 .--------------
 |              
 |              
 |              
-|      2,1     
+|     -2,1     
 |              
 |              
 |              
@@ -181,11 +181,11 @@ class Quasi3d
     EOS
     )
 
-    parts[[-4,1]] = create_wall(9,3,5,1, <<-EOS
+    parts[[4,1]] = create_wall(9,3,5,1, <<-EOS
 --.
   |
   |
--4|
+ 4|
  ,|
  1|
   |
@@ -194,11 +194,11 @@ class Quasi3d
     EOS
     )
 
-    parts[[4,1]] = create_wall(9,3,5,49, <<-EOS
+    parts[[-4,1]] = create_wall(9,3,5,49, <<-EOS
 .--
 |  
 |  
-| 4
+|-4
 | ,
 | 1
 |  
@@ -207,7 +207,7 @@ class Quasi3d
     EOS
     )
 
-    parts[[-1,0]] = create_wall(17,15,1,1, <<-EOS
+    parts[[1,0]] = create_wall(17,15,1,1, <<-EOS
 "-.            
    "-.         
       "-.      
@@ -216,7 +216,7 @@ class Quasi3d
               |
               |
               |
-     -1.0     |
+     1.0      |
               |
               |
               |
@@ -228,7 +228,7 @@ class Quasi3d
     EOS
     )
 
-    parts[[1,0]] = create_wall(17,15,1,37, <<-EOS
+    parts[[-1,0]] = create_wall(17,15,1,37, <<-EOS
             .-"
          .-"   
       .-"      
@@ -237,7 +237,7 @@ class Quasi3d
 |              
 |              
 |              
-|      1,0     
+|     -1,0     
 |              
 |              
 |              
