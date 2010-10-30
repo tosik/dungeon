@@ -4,7 +4,6 @@ class TextWindow < Window
   def initialize(size_y, size_x, pos_y, pos_x, options={})
     super(size_y, size_x, pos_y, pos_x)
     @text = ""
-    @scroll = options.delete(:scroll)
   end
   attr_accessor :text
 
